@@ -60,6 +60,7 @@
 
 .tile.active {
     background-color: lightskyblue;
+    box-shadow: 0 0 10px 1px lightskyblue;
 }
 
 .tile.answered {
