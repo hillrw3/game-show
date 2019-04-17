@@ -1,18 +1,12 @@
 import React, {Component} from 'react'
 import './App.css'
+import {questions} from "./questions"
 
 class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      tiles: [
-        {id: 1, answerHref: 'https://docs.google.com/presentation/d/18zcdyO691L65kRlyTeRsIhur0MlBac-m-PB9M18nUzw/edit#slide=id.g563f44b236_0_4', question: 'All aboard the Agile Release Train. Unless you missed your sprint goals. In that case, get off my train.', answered: false},
-        {id: 2, answerHref: 'https://google.com', question: 'question 2', answered: false},
-        {id: 3, answerHref: 'https://google.com', question: 'question 3', answered: false},
-        {id: 4, answerHref: 'https://google.com', question: 'question 4', answered: false},
-        {id: 5, answerHref: 'https://google.com', question: 'question 5', answered: false},
-        {id: 6, answerHref: 'https://google.com', question: 'question 6', answered: false},
-      ],
+      tiles: questions,
       activeTileId: null,
       activeQuestion: null
     }
@@ -29,7 +23,7 @@ class App extends Component {
       this.setState({activeTileId: unansweredTiles[randomIndex].id})
     }, 100)
 
-    setTimeout(() => clearInterval(spinning), 3000)
+    setTimeout(() => clearInterval(spinning), 2500)
   }
 
   showQuestion = (tile) => {
