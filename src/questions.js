@@ -38,7 +38,7 @@ export const questions = [
   {
     id: 7,
     answerHref: "https://docs.google.com/presentation/d/18zcdyO691L65kRlyTeRsIhur0MlBac-m-PB9M18nUzw/present#slide=id.g57dd39993a_0_10",
-    question: "If everybody keeps their commitments, then we'll have a product in no time",
+    question: "If everybody does what they committed to we'll be in prod on time. Looking at you, Billy. Who missed didn't finish his assigned stories last sprint.",
     answered: false
   },
 ]

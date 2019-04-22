@@ -43,7 +43,7 @@
     color: white;
 }
 
-.app {
+.question-grid {
     display: flex;
     flex: 1 auto;
     flex-wrap: wrap;

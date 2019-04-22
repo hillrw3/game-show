@@ -6,28 +6,26 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      tiles: questions,
-      activeTileId: null,
-      activeQuestion: null
+      questions,
+      selectedQuestionId: null,
+      openQuestion: null
     }
   }
 
   spin = () => {
+    const {questions} = this.state
+    const unansweredTiles = questions.filter(tile => !tile.answered)
+
     const spinning = setInterval(() => {
-      const {tiles} = this.state
-      const unansweredTiles = tiles.filter(tile => !tile.answered)
-
-
       const randomIndex = parseInt(Math.random() * 1000 % unansweredTiles.length)
-
-      this.setState({activeTileId: unansweredTiles[randomIndex].id})
+      this.setState({selectedQuestionId: unansweredTiles[randomIndex].id})
     }, 100)
 
     setTimeout(() => clearInterval(spinning), 2500)
   }
 
   showQuestion = (tile) => {
-    const updatedTiles = this.state.tiles.map(t => {
+    const questions = this.state.questions.map(t => {
       if (tile.id === t.id) {
         t.answered = true
       }
@@ -35,28 +33,24 @@ class App extends Component {
       return t
     })
 
-    this.setState({tiles: updatedTiles, activeQuestion: tile})
+    this.setState({questions, openQuestion: tile})
   }
 
   closeQuestion = () => {
-    this.setState({activeQuestion: null})
+    this.setState({openQuestion: null})
   }
 
   render() {
-    const {tiles, activeTileId, activeQuestion} = this.state
+    const {questions, selectedQuestionId, openQuestion} = this.state
     return (
       <div className="wrapper">
-        {
-          activeQuestion ?
-            <Question question={activeQuestion} close={this.closeQuestion}/> :
-            null
-        }
-        <div className="app">
+        <Question question={openQuestion} close={this.closeQuestion}/>
+        <div className="question-grid">
           {
-            tiles.map(tile =>
+            questions.map(tile =>
               <div key={tile.id}
                    onClick={() => this.showQuestion(tile)}
-                   className={`tile ${tile.id === activeTileId ? 'active' : ''} ${tile.answered ? 'answered' : ''}`}
+                   className={`tile ${tile.id === selectedQuestionId ? 'active' : ''} ${tile.answered ? 'answered' : ''}`}
               />
             )
           }
@@ -70,6 +64,8 @@ class App extends Component {
 }
 
 function Question({question, close}) {
+  if (!question) return null
+
   return (
     <div className="question-wrapper">
       <div className="question-content">
