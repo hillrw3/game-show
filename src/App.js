@@ -16,12 +16,12 @@ class App extends Component {
     const {questions} = this.state
     const unansweredTiles = questions.filter(tile => !tile.answered)
 
-    const spinning = setInterval(() => {
+    const chooseTile = setInterval(() => {
       const randomIndex = parseInt(Math.random() * 1000 % unansweredTiles.length)
       this.setState({selectedQuestionId: unansweredTiles[randomIndex].id})
     }, 100)
 
-    setTimeout(() => clearInterval(spinning), 2500)
+    setTimeout(() => clearInterval(chooseTile), 2500)
   }
 
   showQuestion = (tile) => {
@@ -67,7 +67,7 @@ function Question({question, close}) {
   if (!question) return null
 
   return (
-    <div className="question-wrapper">
+    <div className="question-background">
       <div className="question-content">
         <span className="button-wrapper">
           <button className="question-close-button" onClick={close}>X</button>
