@@ -17,7 +17,7 @@ class App extends Component {
     const unansweredTiles = questions.filter(tile => !tile.answered)
 
     const chooseTile = setInterval(() => {
-      const randomIndex = parseInt(Math.random() * 1000 % unansweredTiles.length)
+      const randomIndex = Math.floor(Math.random() * 1000 % unansweredTiles.length)
       this.setState({selectedQuestionId: unansweredTiles[randomIndex].id})
     }, 100)
 
